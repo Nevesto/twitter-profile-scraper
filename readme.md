@@ -22,7 +22,6 @@ This is a simple twitter tool to scrap images from a twitter profile. I created 
 
 ## .env file
 - Copy all the content in .env example file and paste in your .env file.
-- 
 </br>
 
 ## Use yarn or npm to install the libs
