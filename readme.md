@@ -34,5 +34,8 @@ This is a simple twitter tool to scrap images from a twitter profile. I created 
 
 </br>
 
+# .env file
+- Copy all the content in .env example file and paste in your .env file.
+
 ### To start the code use this command in terminal:
 ``node index.js``
