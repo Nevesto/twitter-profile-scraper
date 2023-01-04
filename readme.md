@@ -31,7 +31,8 @@ git clone https://github.com/Nevesto/twitter-profile-scraper.git
 </br>
 
 ### npm
-````npm i puppeteer dotenv
+````
+npm i puppeteer dotenv
 ````
 
 </br>
