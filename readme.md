@@ -16,7 +16,9 @@ This is a simple twitter tool to scrap images from a twitter profile. I created 
 
 </br>
 
-````git clone https://github.com/Nevesto/twitter-profile-scraper.git````
+````
+git clone https://github.com/Nevesto/twitter-profile-scraper.git
+````
 
 </br>
 
@@ -29,12 +31,15 @@ This is a simple twitter tool to scrap images from a twitter profile. I created 
 </br>
 
 ### npm
-``npm i puppeteer dotenv``
+````npm i puppeteer dotenv
+````
 
 </br>
 
 ###  yarn
-``yarn add puppeteer dotenv``
+````
+yarn add puppeteer dotenv
+````
 
 </br>
 
