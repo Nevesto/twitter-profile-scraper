@@ -46,3 +46,8 @@ yarn add puppeteer dotenv
 
 ### To start the code use this command in terminal:
 ``node index.js``
+
+</br>
+
+### Text me in discord:
+``Nevest#5782``
