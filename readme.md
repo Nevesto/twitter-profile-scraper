@@ -50,4 +50,4 @@ yarn add puppeteer dotenv
 </br>
 
 ### Text me in discord:
-``Nevest#5782``
+Nevest#5782
