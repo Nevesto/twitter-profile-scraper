@@ -7,6 +7,7 @@ This is a simple twitter tool to scrap images from a twitter profile. I created 
 ## Prerequisites
 
 - You need to have a [Twitter Account](https://twitter.com/i/flow/signup) to navigate into twitter platafom.
+- You need to have [Nodejs](https://nodejs.org/en/) to install the dependencies and run the project.
 
 </br>
 
@@ -24,6 +25,7 @@ git clone https://github.com/Nevesto/twitter-profile-scraper.git
 
 ## .env file
 - Copy all the content in .env example file and paste in your .env file.
+- Put your twitter credentials in the .env file.
 </br>
 
 ## Use yarn or npm to install the libs
