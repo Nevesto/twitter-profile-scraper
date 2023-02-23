@@ -51,10 +51,12 @@ yarn add puppeteer dotenv
 Comment all the code after ```print('Bot iniciado.');``` and log in twitter. After this you can use as normally.
 
 </br>
+
 ### To start the code use this command in terminal:
 ``node index.js``
 
 </br>
 
-### Text me in discord:
-nevest#2134
+### If u got any problems create a new issue or text me in discord or telegram:
+Discord: nevest#2134
+Telegram: https://t.me/nevestpq
