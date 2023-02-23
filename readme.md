@@ -25,7 +25,6 @@ git clone https://github.com/Nevesto/twitter-profile-scraper.git
 
 ## .env file
 - Copy all the content in .env example file and paste in your .env file.
-- Put your twitter credentials in the .env file.
 </br>
 
 ## Use yarn or npm to install the libs
@@ -46,6 +45,12 @@ yarn add puppeteer dotenv
 
 </br>
 
+# How to use:
+
+- You will need to log in your twitter account for the first time to create 'cache' dir, after this your credentials will get saved.
+Comment all the code after ```print('Bot iniciado.');``` and log in twitter. After this you can use as normally.
+
+</br>
 ### To start the code use this command in terminal:
 ``node index.js``
 
