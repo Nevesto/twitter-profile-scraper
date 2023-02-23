@@ -2,76 +2,71 @@ const pup = require('puppeteer');
 const fs = require('fs');
 require('dotenv').config();
 
+//getting cache of navigator to stay logged in.
+const dir = __dirname + './cache';
+
 async function main() {
     
-    const browser = await pup.launch({headless:false});
-    const page = await browser.newPage();
-    console.log("Bot iniciado.");
-    
-    await page.goto(process.env.TRAVEL_URL);
-    console.log("Indo para url.");
-    
-    async function login() {
-        console.log("Aguardando seletor do input.");
-        await page.waitForSelector(process.env.START_INPUT);
-        console.log("input find.");
-        
-        await page.type(process.env.USER_INPUT, process.env.ACCOUNT_USER);
-        await page.click(process.env.USER_BUTTON);
-        console.log("Adicionando user.");
-        
-        await page.waitForSelector(process.env.PASSWORD_WAITFORSELECTOR);
-        await page.type(process.env.PASSWORD_SELECTOR, process.env.ACCOUNT_PASSWORD);
-        console.log("Adicionando senha.");
-        
-        await page.click(process.env.ENTER_BUTTON);
-        console.log("Entrou na conta.");
-        profileFinder();
-    }; login();
-    
-    async function profileFinder() {
-        console.log("Esperando seletor de busca.");
-        await page.waitForSelector(process.env.WAIT_FOR_FIND_SELECTOR);
-        
-        console.log("Clicando no seletor de busca.");
-        await page.click(process.env.FIND_BUTTON);
-        
-        console.log("Esperando seletor de input.");
-        await page.waitForSelector(process.env.WAIT_PROFILE_INPUT);
-        await page.type(process.env.TYPE_USER, process.env.TWITTER_PROFILE);
-        console.log("Perfil encontrado.");
-        
-        await page.waitForTimeout(3000);
-        await page.click(process.env.PROFILE_CLICK);
-        console.log("entrando no perfil.");
-        imagesDownload()
+    // Teamplate function
+    function print(prhase) {
+        console.log(prhase);
     };
     
-    async function imagesDownload() {
-        // Get the profile picture and banner
-        
-        await page.waitForTimeout(1500);
-        
-        const pfpURL = await page.$eval(process.env.PFP, img => img.getAttribute('src'));
-        console.log(pfpURL);
-        
-        
-        const bannerURL = await page.$eval(process.env.BANNER, img => img.getAttribute('src'));
-        console.log(bannerURL);
-        
-        // download function
-        
-        await page.waitForTimeout(1500)
-        
-        const pfp = await page.goto(pfpURL);
-        const pfpBUffer = await pfp.buffer();
-        await fs.promises.writeFile('./pfp.jpg', pfpBUffer);
-        
-        
-        const banner = await page.goto(bannerURL);
-        const bannerBUffer = await banner.buffer();
-        await fs.promises.writeFile('./banner.jpg', bannerBUffer);
-        await browser.close();
-        console.log("Scraper finalizado.");
+    async function init() {
+        const browser = await pup.launch({headless:false, userDataDir:dir,}); //headless bug, i will fix it i promisse (:
+        const page = await browser.newPage();
+        return [browser, page]
     };
-}main();
+
+    async function goToUrl(pupPage, url) {
+        await pupPage.goto(url);
+    };
+    
+    async function writeById(pupPage, id, word) {
+        await pupPage.type(id, word);
+    };
+
+    async function clickElement(pupPage, id) {
+        await pupPage.click(id);
+    };
+    
+    async function getImage(pupPage, id) {
+        const imgUrl = await pupPage.$eval(id, img => img.getAttribute('src'));
+        return imgUrl
+    };
+
+    async function wait(pupPage, time) {
+        await pupPage.waitForTimeout(time);
+    };
+    
+    // going to profile 
+    let scopeVariables = await init();
+    const browser = scopeVariables[0];
+    const page = scopeVariables[1];
+    await goToUrl(page, process.env.TRAVEL_URL);
+    print('Bot iniciado.');
+    await wait(page, 4000);
+    await clickElement(page, process.env.FIND_BUTTON);
+    await wait(page, 4000);
+    await writeById(page, process.env.TYPE_USER, process.env.TWITTER_PROFILE);
+    await wait(page, 4000);
+    await clickElement(page, process.env.PROFILE_CLICK);
+    
+    // gets the src attribute of the img html tag
+    await wait(page, 4000);
+    const pfpUrl = await getImage(page, process.env.PFP);
+    print(pfpUrl);
+    const bannerUrl = await getImage(page, process.env.BANNER);
+    print(bannerUrl);
+
+    // uses fs and buffer to get the images and write a file .jpg
+    await wait(page, 4000);
+    const pfp = await page.goto(pfpUrl);
+    const pfpBUffer = await pfp.buffer();
+    await fs.promises.writeFile('./pfp.jpg', pfpBUffer);
+    const banner = await page.goto(bannerUrl);
+    const bannerBUffer = await banner.buffer();
+    await fs.promises.writeFile('./banner.jpg', bannerBUffer);
+    await browser.close();
+    print('end.')
+} main();
