@@ -57,7 +57,6 @@ Comment all the code after ```print('Bot iniciado.');``` and log in twitter. Aft
 
 </br>
 
-### If u got any problems create a new issue or text me on discord or telegram:
-Discord: nevest#2134
+### If u got any problems create a new issue or text me on telegram:
 </br>
 Telegram: https://t.me/nevestpq
